@@ -16,6 +16,9 @@ The application reads an input file named `input.txt` in the project root direct
 
 You can change the input file, chunk size, QR code size, and output file by modifying the constants in the `App` class.
 
+## Todo
+- [ ] gif file is too large // https://www.baeldung.com/java-image-compression-lossy-lossless
+
 ## License
 
 This project is licensed under the MIT License.

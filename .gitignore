@@ -1,3 +1,5 @@
 .vscode/
 
 target/
+output.gif
+input.txt

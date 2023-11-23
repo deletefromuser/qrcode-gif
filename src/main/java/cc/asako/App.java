@@ -2,16 +2,18 @@ package cc.asako;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.stream.FileImageOutputStream;
 import javax.imageio.stream.ImageOutputStream;
 
+import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
@@ -23,7 +25,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
  */
 public class App {
     private static final String OUTPUT_GIF = "output.gif";
-    private static final int CHUNK_SIZE = 1024; // size of file chunks
+    private static final int CHUNK_SIZE = 2048; // size of file chunks
     private static final int QR_CODE_WIDTH = 1000; // width of QR code
     private static final int QR_CODE_HEIGHT = 1000; // height of QR code
 
@@ -31,12 +33,18 @@ public class App {
         File file = new File("input.txt"); // input file
         String fileContentBase64 = encodeFileToBase64(file);
 
+        int count = (int) Math.ceil((fileContentBase64.length() + 0.0) / CHUNK_SIZE);
         int index = 0;
         List<BufferedImage> images = new ArrayList<>();
+        Gson gs = new Gson();
         while (index < fileContentBase64.length()) {
             String chunk = fileContentBase64.substring(index, Math.min(index + CHUNK_SIZE, fileContentBase64.length()));
-            chunk += ""; // add metadata
-            BufferedImage qrCode = createQRCode(chunk, QR_CODE_WIDTH, QR_CODE_HEIGHT);
+            // add metadata
+            Map<String, String> data = new LinkedHashMap<>();
+            data.put("count", count + "");
+            data.put("index", index / CHUNK_SIZE + "");
+            data.put("data", chunk);
+            BufferedImage qrCode = createQRCode(gs.toJson(data), QR_CODE_WIDTH, QR_CODE_HEIGHT);
             images.add(qrCode);
             index += CHUNK_SIZE;
         }
