@@ -41,6 +41,7 @@ public class App {
             String chunk = fileContentBase64.substring(index, Math.min(index + CHUNK_SIZE, fileContentBase64.length()));
             // add metadata
             Map<String, String> data = new LinkedHashMap<>();
+            data.put("name", file.getName());
             data.put("count", count + "");
             data.put("index", index / CHUNK_SIZE + "");
             data.put("data", chunk);
