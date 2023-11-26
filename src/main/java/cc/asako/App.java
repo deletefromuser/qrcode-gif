@@ -25,12 +25,17 @@ import com.google.zxing.qrcode.QRCodeWriter;
  */
 public class App {
     private static final String OUTPUT_GIF = "output.gif";
-    private static final int CHUNK_SIZE = 2048; // size of file chunks
+    private static final int CHUNK_SIZE = 1024; // size of file chunks
     private static final int QR_CODE_WIDTH = 1000; // width of QR code
     private static final int QR_CODE_HEIGHT = 1000; // height of QR code
 
     public static void main(String[] args) throws Exception {
-        File file = new File("input.txt"); // input file
+        String path = "input.txt";
+        if (args.length > 0) {
+            path = args[0];
+        }
+        File file = new File(path); // input file
+
         String fileContentBase64 = encodeFileToBase64(file);
 
         int count = (int) Math.ceil((fileContentBase64.length() + 0.0) / CHUNK_SIZE);
@@ -66,7 +71,7 @@ public class App {
 
     private static void createAnimatedGif(List<BufferedImage> images, File output) throws IOException {
         try (ImageOutputStream outputStream = new FileImageOutputStream(output)) {
-            GifSequenceWriter writer = new GifSequenceWriter(outputStream, BufferedImage.TYPE_INT_RGB, 1000, true);
+            GifSequenceWriter writer = new GifSequenceWriter(outputStream, BufferedImage.TYPE_INT_RGB, 3000, true);
             for (BufferedImage image : images) {
                 writer.writeToSequence(image);
             }
