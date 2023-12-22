@@ -124,6 +124,23 @@
               </execution>
           </executions>
       </plugin>
+      <plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.1.6.RELEASE</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<layout>ZIP</layout>
+					<includeSystemScope>true</includeSystemScope>
+					<mainClass>cc.asako.App</mainClass>
+				</configuration>
+			</plugin>
       </plugins>
     </pluginManagement>
   </build>

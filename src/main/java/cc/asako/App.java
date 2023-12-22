@@ -55,7 +55,7 @@ public class App {
             index += CHUNK_SIZE;
         }
 
-        createAnimatedGif(images, new File(OUTPUT_GIF));
+        createAnimatedGif(images, new File(file.getName().replaceAll("\\.([a-zA-Z]+\\w*|\\w*[a-zA-Z]+)$", "") + ".gif"));
     }
 
     private static String encodeFileToBase64(File file) throws IOException {
