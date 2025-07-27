@@ -3,6 +3,7 @@ package cc.asako;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -46,7 +47,7 @@ public class App {
             String chunk = fileContentBase64.substring(index, Math.min(index + CHUNK_SIZE, fileContentBase64.length()));
             // add metadata
             Map<String, String> data = new LinkedHashMap<>();
-            data.put("name", file.getName());
+            data.put("name", Base64.getEncoder().encodeToString(file.getName().getBytes(StandardCharsets.UTF_8)));
             data.put("count", count + "");
             data.put("index", index / CHUNK_SIZE + "");
             data.put("data", chunk);
