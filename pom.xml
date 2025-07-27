@@ -7,16 +7,15 @@
 
   <groupId>cc.asako</groupId>
   <artifactId>qrcode-gif</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.2</version>
 
   <name>qrcode-gif</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/deletefromuser/qrcode-gif</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>
